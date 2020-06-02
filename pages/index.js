@@ -10,7 +10,7 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to <a href="#" onClick={()=>window.open("/api/login","Login","width=500,height=800")}>Next.js!</a>
         </h1>
 
         <p className="description">
