@@ -11,7 +11,7 @@ export default function Discover() {
         <Button primary size="small" label="Start a Video Session" />
       </Header>
 
-      <style>{`
+      <style jsx>{`
         #discover-page {
           font-family: 'Inter', sans-serif;
           margin-top: 25px;
