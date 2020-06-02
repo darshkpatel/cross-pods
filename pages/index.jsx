@@ -25,6 +25,17 @@ export default function Index() {
           You Should Be Redirected Soon
         </h2>
       </main>
+      <style jsx>
+        {`
+      .container {
+           min-height: 100vh;
+           padding: 0 0.5rem;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+         }`}
+      </style>
     </div>
   );
 }
