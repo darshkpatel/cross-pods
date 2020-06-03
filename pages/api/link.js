@@ -27,8 +27,9 @@ export default async function link(req, res) {
     } else {
         const members = [value[0].members[0], value[0].members[1], value[0].members[2]];
         Field.update({ _id: { $in: members } }, { online: false, room: "" })
+        res.json({
+            room: ""
+        })
     }
-    res.json({
-        room: ""
-    })
+
 }
