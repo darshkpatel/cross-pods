@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@weknow/react-bubble-chart-d3": "^1.0.12",
     "grommet": "^2.13.0",
     "next": "9.4.4",
     "react": "16.13.1",

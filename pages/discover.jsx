@@ -1,4 +1,9 @@
-import { Header, Button, Avatar, Box } from 'grommet'
+import {
+  Header,
+  Button,
+  Avatar,
+  Box,
+} from 'grommet';
 
 export default function Discover() {
   return (
@@ -11,19 +16,22 @@ export default function Discover() {
         <Box
           direction="row"
           align="center"
-          gap="medium">
-            <Button
-              primary size="small"
-              label="Start a Video Session" 
-            />
-            <Avatar
-              background="light-6"
-              src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-            />
+          gap="medium"
+        >
+          <Button
+            primary
+            size="small"
+            label="Start a Video Session"
+          />
+          <Avatar
+            background="light-6"
+            src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+          />
         </Box>
       </Header>
 
-      <style jsx>{`
+      <style jsx>
+        {`
         #discover-page {
           font-family: 'Inter', sans-serif;
           margin-top: 25px;
@@ -38,7 +46,8 @@ export default function Discover() {
         .margin-0 {
           margin: 0;
         }
-      `}</style>
+      `}
+      </style>
     </div>
-  )
+  );
 }
