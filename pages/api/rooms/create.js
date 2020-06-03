@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import https from 'https';
-// Creating API endpoint , in case we deice to add WebRTC support in future
+// Creating API endpoint , in case we decide to add WebRTC support in future
 const client = axios.create(
   {
     httpsAgent: new https.Agent({
