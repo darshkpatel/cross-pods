@@ -3,6 +3,7 @@ import {
   Button,
   Avatar,
   Box,
+  Stack,
 } from 'grommet';
 import Graph from 'react-graph-vis';
 // import useWindowDimensions from '../hooks/useWindowDimensions';
@@ -76,38 +77,38 @@ export default function Discover() {
 
   return (
     <div id="discover-page">
-      <div id="header">
-        <Header>
-          <Box>
-            <h1 className="text-black-grey margin-0">Discover</h1>
-            <p className="margin-0">Explore active fellows from different pods.</p>
-          </Box>
-          <Box
-            direction="row"
-            align="center"
-            gap="medium"
-          >
-            <Button
-              primary
-              size="small"
-              label="Start a Video Session"
-            />
-            <Avatar
-              background="light-6"
-              src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-            />
-          </Box>
-        </Header>
-      </div>
-
-      <div id="bubble-view">
-        <Graph
-          identifier="fuck-nus"
-          graph={graph}
-          options={options}
-        />
-      </div>
-
+      <Stack>
+        <div id="bubble-view">
+          <Graph
+            identifier="bubble-graph"
+            graph={graph}
+            options={options}
+          />
+        </div>
+        <div id="header">
+          <Header>
+            <Box>
+              <h1 className="text-black-grey margin-0">Discover</h1>
+              <p className="margin-0">Explore active fellows from different pods.</p>
+            </Box>
+            <Box
+              direction="row"
+              align="center"
+              gap="medium"
+            >
+              <Button
+                primary
+                size="small"
+                label="Start a Video Session"
+              />
+              <Avatar
+                background="light-6"
+                src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+              />
+            </Box>
+          </Header>
+        </div>
+      </Stack>
       <style jsx>
         {`
         #discover-page {
@@ -121,7 +122,7 @@ export default function Discover() {
         }
 
         #bubble-view {
-          position: absolute;
+          position: fixed;
           width: 100vw;
           height: 100vh;
           top: 0;
