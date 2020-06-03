@@ -29,8 +29,13 @@ const LoginPage = () => (
           ['left-bottom', 'right'],
         ]}
       >
-        <Heading gridArea="left-top" alignSelf="end" margin="medium">Cross Pods</Heading>
-        <Text gridArea="left-top" alignSelf="end" margin={{ top: 'large', left: 'medium' }}>Final Piece To The MLH Fellowship Experience </Text>
+
+        <Box gridArea="left-top" direction="row">
+          <Box alignSelf="end" alignContent="center">
+            <Heading textAlign="center" margin={{ bottom: 'xsmall' }}>Cross Pods</Heading>
+            <Text textAlign="center">Final Piece To The MLH Fellowship Experience </Text>
+          </Box>
+        </Box>
 
         {/* left side , middle box in grid */}
         <Box gridArea="left-mid" direction="row">
@@ -39,7 +44,7 @@ const LoginPage = () => (
           <Box
             justify="center"
             height="100px"
-            width="300px"
+            width="400px"
             alignSelf="start"
             align="center"
           >
