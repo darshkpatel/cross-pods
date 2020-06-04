@@ -4,14 +4,13 @@ import dbConnect from "../../utils/db"
 
 export default async function list(req, res) {
     try {
-        await dbConnect
+        await dbConnect()
         const user = (await auth0.getSession(req)).user
         let value = await Field.aggregate([
             {
                 $match: {
                     username: { $ne: user.nickname },
-
-                    $or: [{ online: true }, { room: { $exists: true } }]
+                    $or: [{ online: true }, { room: { $ne: null } }]
 
                 }
             },
