@@ -110,6 +110,10 @@ export default function Discover() {
                 label="Start a Video Session"
                 onClick={async () => {
                   const id = await createChatRoom();
+                  if (id.toLowerCase().includes('wait')) {
+                    alert('Please wait for the other fellows to join.');
+                    return;
+                  }
                   window.open(`/api/redirect/${id}`);
                 }}
               />
