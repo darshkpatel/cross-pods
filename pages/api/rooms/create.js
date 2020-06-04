@@ -54,7 +54,7 @@ export default async function link(req, res) {
         }
       }
     ])
-    if (value.length == 0) {
+    if (value.length < 3) {
       res.json({
         message: "Wait For other fellow to join"
       })
