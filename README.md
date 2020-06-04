@@ -1,5 +1,5 @@
 # Cross Pods
-## A better avenue for fellows to have meaningful interactions across different pods
+## The final piece to the MLH Fellowship experience.
 
-### Check it out at: [cross-pods.now.sh](https://cross-pods.now.sh/)
+### Check it out at: [crosspods.team](https://crosspods.team/)
 
