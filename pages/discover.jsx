@@ -61,6 +61,7 @@ export default function Discover() {
 
     getProfile();
     getActiveFellows();
+    setInterval(getActiveFellows, 3000);
   }, []);
 
   const generateInteger = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
