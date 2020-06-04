@@ -62,7 +62,7 @@ export default async function link(req, res) {
       })
     } else {
       const room = await GenerateRoomID();
-      const members = [value[0].members[0], value[0].members[1], fellow._id];
+      const members = [value[0].members[0], value[1].members[0], fellow._id];
       const redirect = await Redirect.create({ url: `https://meet.jit.si/${room}`, members })
       await Fellow.updateMany({ _id: { $in: members } }, { online: false, room: redirect._id })
       res.json({
