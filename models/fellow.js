@@ -8,7 +8,7 @@ const memberSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
-    room: String
+    room: mongoose.Types.ObjectId
 })
 
 export default mongoose.models.member || mongoose.model("member", memberSchema);
