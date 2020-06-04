@@ -1,6 +1,12 @@
 
 import axios from 'axios';
 import https from 'https';
+import crypto from 'crypto';
+import Fellow from "../../../models/fellow"
+import auth0 from "../../../utils/auth"
+import dbConnect from "../../../utils/db"
+import Redirect from "../../../models/redirect"
+
 // Creating API endpoint , in case we decide to add WebRTC support in future
 const client = axios.create(
   {
@@ -16,17 +22,55 @@ client.interceptors.response.use(
     throw new Error(err);
   },
 );
-export async function GenerateRoom() {
-  const response = await client.get('https://videolink2me.com/create_room');
-  return response.data;
+
+
+export async function GenerateRoomID() {
+  const buf = crypto.randomBytes(20);
+  return buf.toString('hex');
 }
 
 
-export default async function callback(req, res) {
+export default async function link(req, res) {
   try {
-    const response = await GenerateRoom();
-    res.status(200).json(response);
+    await dbConnect()
+    const user = (await auth0.getSession(req)).user
+    const fellow = await Fellow.findOne({ username: user.nickname })
+
+    if (fellow.room) {
+      res.json({ message: fellow.room })
+    }
+
+    let value = await Fellow.aggregate([
+      {
+        $match: {
+          online: true,
+          username: { $ne: user.nickname },
+          podId: { $ne: fellow.podId }
+        }
+      },
+      {
+        $group: {
+          _id: "$podId",
+          members: { $push: "$_id" }
+        }
+      }
+    ])
+    if (value.length < 2) {
+      res.json({
+        message: "Wait For other fellow to join"
+      })
+      Fellow.update({ username: user.nickname }, { $set: { online: true } })
+    } else {
+      const room = await GenerateRoomID();
+      const members = [value[0].members[0], value[0].members[1], fellow._id];
+      const redirect = await Redirect.create({ url: `https://meet.jit.si/${room}`, members })
+      await Fellow.update({ _id: { $in: members } }, { online: false, room: redirect._id })
+      res.json({
+        message: redirect._id,
+      })
+    }
   } catch (error) {
-    res.status(error.status || 400).end(error.message);
+    res.status(error.status || 500).end(error.message);
   }
+
 }

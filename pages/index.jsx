@@ -1,32 +1,20 @@
 import Head from 'next/head';
-import Router from 'next/router';
-import React, { useEffect } from 'react';
+import auth0 from '../utils/auth';
 
-export default function Index() {
-  const isLoggedIn = false; // Temporary: Should Check Auth
 
-  useEffect(() => {
-    const { pathname } = Router;
-    if (pathname === '/' && !isLoggedIn) {
-      Router.push('/login');
-    } else {
-      // Redirect to Dashboard
-    }
-  });
-
-  return (
-    <div className="container">
-      <Head>
-        <title>Cross Pods</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main>
-        <h2>
-          You Should Be Redirected Soon
-        </h2>
-      </main>
-      <style jsx>
-        {`
+const Index = () => (
+  <div className="container">
+    <Head>
+      <title>Cross Pods</title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
+    <main>
+      <h2>
+        You will soon be Redirected
+      </h2>
+    </main>
+    <style jsx>
+      {`
       .container {
            min-height: 100vh;
            padding: 0 0.5rem;
@@ -35,7 +23,28 @@ export default function Index() {
            justify-content: center;
            align-items: center;
          }`}
-      </style>
-    </div>
-  );
-}
+    </style>
+  </div>
+);
+
+
+Index.getInitialProps = async ({ req, res }) => {
+  if (typeof window === 'undefined') {
+    const session = await auth0.getSession(req);
+    if (!session || !session.user) {
+      res.writeHead(302, {
+        Location: '/login',
+      });
+      res.end();
+      return;
+    }
+    // If Logged in, redirect to discover
+    res.writeHead(302, {
+      Location: '/discover',
+    });
+    res.end();
+  }
+  return;
+};
+
+export default Index;
