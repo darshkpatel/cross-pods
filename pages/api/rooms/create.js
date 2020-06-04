@@ -26,7 +26,7 @@ client.interceptors.response.use(
 
 export async function GenerateRoomID() {
   const buf = crypto.randomBytes(20);
-  return buf.toString('utf8');
+  return buf.toString('hex');
 }
 
 
