@@ -48,7 +48,7 @@ const LoginPage = () => (
             alignSelf="start"
             align="center"
           >
-            <Button size="small">
+            <Button size="small" target="_blank" href="/api/login">
               <Box pad="small" direction="row" align="center" gap="small" background="black">
                 <Github />
                 {' '}
