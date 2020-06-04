@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Header,
   Button,
@@ -7,59 +8,17 @@ import {
 } from 'grommet';
 import Graph from 'react-graph-vis';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 
 export default function Discover() {
-  const graph = {
-    nodes: [
-      {
-        id: 1,
-        // label: 'Node 1',
-        title: 'node 1 tootip text',
-        shape: 'image',
-        image: 'https://cdn4.iconfinder.com/data/icons/linecon/512/photo-512.png',
-      },
-      {
-        id: 2,
-        // label: 'Node 2',
-        title: 'node 2 tootip text',
-        shape: 'image',
-        image: 'https://cdn4.iconfinder.com/data/icons/linecon/512/photo-512.png',
-      },
-      {
-        id: 3,
-        // label: 'Node 3',
-        title: 'node 3 tootip text',
-        shape: 'image',
-        image: 'https://cdn4.iconfinder.com/data/icons/linecon/512/photo-512.png',
-      },
-      {
-        id: 4,
-        // label: 'Node 4',
-        title: 'node 4 tootip text',
-        shape: 'image',
-        image: 'https://cdn4.iconfinder.com/data/icons/linecon/512/photo-512.png',
-      },
-      {
-        id: 5,
-        // label: 'Node 5',
-        title: 'node 5 tootip text',
-        shape: 'image',
-        image: 'https://cdn4.iconfinder.com/data/icons/linecon/512/photo-512.png',
-      },
-    ],
-    edges: [],
-  };
-
-  const options = {
+  const graphOptions = {
     nodes: {
       borderWidth: 0,
       shape: 'circle',
       color: {
-        background: '#F92C55',
+        background: '#fff',
         highlight: {
-          background: '#F92C55',
-          border: '#F92C55',
+          background: '#fff',
+          border: '#fff',
         },
       },
       font: {
@@ -71,12 +30,22 @@ export default function Discover() {
       minVelocity: 0.01,
       solver: 'repulsion',
       repulsion: {
-        nodeDistance: 40,
+        nodeDistance: 120,
       },
     },
   };
 
+  const graphEvents = {
+    click: (event) => {
+      const { nodes } = event;
+      if (nodes.length > 0) {
+        window.open(`https://github.com/${nodes[0]}`);
+      }
+    },
+  };
+
   const [profile, setProfile] = useState({});
+  const [activeFellows, setActiveFellows] = useState([]);
 
   useEffect(() => {
     const getProfile = async () => {
@@ -84,7 +53,26 @@ export default function Discover() {
       setProfile(result.data);
     };
 
+    const getActiveFellows = async () => {
+      const result = await axios.get('/api/list');
+      setActiveFellows(result.data);
+    };
+
     getProfile();
+    getActiveFellows();
+  }, []);
+
+  const generateInteger = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+  const fellowsToGraph = (fellows) => ({
+    nodes: fellows.map((fellow) => ({
+      id: fellow.username,
+      title: fellow.username,
+      shape: 'circularImage',
+      image: fellow.profile[0].picture,
+      size: generateInteger(50, 100),
+    })),
+    edges: [],
   });
 
   return (
@@ -93,8 +81,9 @@ export default function Discover() {
         <div id="bubble-view">
           <Graph
             identifier="bubble-graph"
-            graph={graph}
-            options={options}
+            graph={fellowsToGraph(activeFellows)}
+            options={graphOptions}
+            events={graphEvents}
           />
         </div>
         <div id="header">
