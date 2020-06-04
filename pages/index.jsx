@@ -1,18 +1,16 @@
 import Head from 'next/head';
 import Router from 'next/router';
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useFetchUser } from '../utils/user';
+
+
+const Redirect = (props) => {
+  Router.push(props.url);
+  return 'Redirecting';
+};
 
 export default function Index() {
-  const isLoggedIn = false; // Temporary: Should Check Auth
-
-  useEffect(() => {
-    const { pathname } = Router;
-    if (pathname === '/' && !isLoggedIn) {
-      Router.push('/login');
-    } else {
-      // Redirect to Dashboard
-    }
-  });
+  const { user, loading } = useFetchUser();
 
   return (
     <div className="container">
@@ -22,7 +20,9 @@ export default function Index() {
       </Head>
       <main>
         <h2>
-          You Should Be Redirected Soon
+          You will soon be Redirected
+          { !loading && user ? <Redirect url="/discover" /> : '' }
+          { !loading && !user ? <Redirect url="/login" /> : '' }
         </h2>
       </main>
       <style jsx>
