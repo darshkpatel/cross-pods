@@ -5,6 +5,7 @@ import {
   Avatar,
   Box,
   Stack,
+  Menu,
 } from 'grommet';
 import Graph from 'react-graph-vis';
 import axios from 'axios';
@@ -102,10 +103,17 @@ export default function Discover() {
                 size="small"
                 label="Start a Video Session"
               />
-              <Avatar
-                background="light-6"
-                src={profile.picture}
-              />
+              <Menu
+                dropAlign={{ right: 'left', top: 'bottom' }}
+                items={[
+                  { label: 'Logout', onClick: () => {} },
+                ]}
+              >
+                <Avatar
+                  background="light-6"
+                  src={profile.picture}
+                />
+              </Menu>
             </Box>
           </Header>
         </div>
