@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "grommet": "^2.13.0",
     "grommet-icons": "^4.4.0",
+    "isomorphic-unfetch": "^3.0.0",
     "mongoose": "^5.9.17",
     "next": "9.4.4",
     "react": "16.13.1",
