@@ -10,7 +10,7 @@ export default function Index() {
     if (pathname === '/' && !isLoggedIn) {
       Router.push('/login');
     } else {
-      // Redirect to Dashboard
+      Router.push('/discover');
     }
   });
 

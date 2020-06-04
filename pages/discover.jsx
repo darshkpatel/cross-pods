@@ -6,6 +6,8 @@ import {
   Stack,
 } from 'grommet';
 import Graph from 'react-graph-vis';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function Discover() {
   const graph = {
@@ -74,6 +76,17 @@ export default function Discover() {
     },
   };
 
+  const [profile, setProfile] = useState({});
+
+  useEffect(() => {
+    const getProfile = async () => {
+      const result = await axios.get('/api/me');
+      setProfile(result.data);
+    };
+
+    getProfile();
+  });
+
   return (
     <div id="discover-page">
       <Stack>
@@ -102,7 +115,7 @@ export default function Discover() {
               />
               <Avatar
                 background="light-6"
-                src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                src={profile.picture}
               />
             </Box>
           </Header>

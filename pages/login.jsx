@@ -34,8 +34,8 @@ const LoginPage = () => (
           justify="center"
         >
           <Box alignSelf="end" alignContent="center">
-            <Heading textAlign="left" margin={{ bottom: 'xsmall' }}>Cross Pods</Heading>
-            <Text textAlign="left">The final piece to the MLH Fellowship experience.</Text>
+            <Heading margin={{ bottom: 'xsmall' }}>Cross Pods</Heading>
+            <Text>The final piece to the MLH Fellowship experience.</Text>
             <br />
             <Button target="_blank" href="/api/login">
               <Box
