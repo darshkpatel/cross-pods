@@ -66,6 +66,11 @@ export default function Discover() {
 
   const generateInteger = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
+  const createChatRoom = async () => {
+    const result = await axios.get('/api/rooms/create');
+    return result.data.message;
+  };
+
   const fellowsToGraph = (fellows) => ({
     nodes: fellows.map((fellow) => ({
       id: fellow.username,
@@ -103,6 +108,10 @@ export default function Discover() {
                 primary
                 size="small"
                 label="Start a Video Session"
+                onClick={async () => {
+                  const id = await createChatRoom();
+                  window.open(`/api/redirect/${id}`);
+                }}
               />
               <Menu
                 dropAlign={{ right: 'left', top: 'bottom' }}
