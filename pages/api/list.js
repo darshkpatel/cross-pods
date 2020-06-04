@@ -9,8 +9,10 @@ export default async function list(req, res) {
         let value = await Field.aggregate([
             {
                 $match: {
-                    online: true,
-                    username: { $ne: user.nickname }
+                    username: { $ne: user.nickname },
+
+                    $or: [{ online: true }, { room: { $exists: true } }]
+
                 }
             },
             {
