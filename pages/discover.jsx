@@ -6,7 +6,6 @@ import {
   Stack,
 } from 'grommet';
 import Graph from 'react-graph-vis';
-// import useWindowDimensions from '../hooks/useWindowDimensions';
 
 export default function Discover() {
   const graph = {
@@ -111,14 +110,14 @@ export default function Discover() {
       </Stack>
       <style jsx>
         {`
-        #discover-page {
-          font-family: 'Inter', sans-serif;
+        #header {
+          margin-top: 30px;
+          margin-left: 30px;
+          margin-right: 30px;
         }
 
-        #header {
-          margin-top: 25px;
-          margin-left: 25px;
-          margin-right: 25px;
+        #header p {
+          margin-top: 10px;
         }
 
         #bubble-view {
