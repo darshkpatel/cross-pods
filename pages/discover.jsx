@@ -107,7 +107,7 @@ export default function Discover() {
               <Menu
                 dropAlign={{ right: 'left', top: 'bottom' }}
                 items={[
-                  { label: 'Logout', onClick: () => {} },
+                  { label: 'Logout', onClick: () => { window.open('/api/logout', '_self'); } },
                 ]}
               >
                 <Avatar
