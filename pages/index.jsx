@@ -44,6 +44,7 @@ Index.getInitialProps = async ({ req, res }) => {
     });
     res.end();
   }
+  return;
 };
 
 export default Index;
