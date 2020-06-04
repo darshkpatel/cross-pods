@@ -12,7 +12,7 @@ export default async function link(req, res) {
             query: { id },
         } = req
         let redirect = await Redirect.findById(id)
-        Fellow.update({ username: user.nickname }, { $set: { room: null, online: false } })
+        await Fellow.updateMany({ username: user.nickname }, { $set: { room: null, online: false } })
         res.statusCode = 307
         res.setHeader('Location', redirect.url)
         res.end("redirecting")
