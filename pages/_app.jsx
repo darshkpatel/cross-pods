@@ -4,7 +4,7 @@ import { Grommet } from 'grommet';
 const theme = {
   global: {
     font: {
-      family: "'Roboto', sans-serif;",
+      family: "'Inter', sans-serif;",
     },
   },
 };
