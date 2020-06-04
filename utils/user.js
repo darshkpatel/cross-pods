@@ -10,10 +10,13 @@ export const fetchUser = async () => {
   if (userState !== undefined) {
     return userState;
   }
-
-  const res = await axios.get('/api/me');
-  userState = res.ok ? await res.json() : null;
-  return userState;
+  try {
+    const res = await axios.get('/api/me');
+    userState = res.ok ? await res.json() : null;
+    return userState;
+  } catch {
+    return null;
+  }
 };
 
 export const UserProvider = ({ value, children }) => {
