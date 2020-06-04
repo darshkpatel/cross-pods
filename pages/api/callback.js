@@ -7,7 +7,7 @@ export default async function callback(req, res) {
         await auth0.handleCallback(req, res, {
             redirectTo: '/close', onUserLoaded: async (req, res, session, state) => {
                 let fellow = await getPodName(session.user.nickname)
-                let profiles = await Profile.find({ username: session.user.nickname })
+                let profiles = await Profile.find({ nickname: session.user.nickname })
                 if (profiles.length == 0) await Profile.create(session.user)
                 if (fellow.length == 0) throw new Error({ message: "It is only for mlh fellows" })
                 return session;
