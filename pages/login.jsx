@@ -62,7 +62,12 @@ const LoginPage = () => {
             ['left-bottom', 'right'],
           ]}
         >
-          <Box alignSelf="end" alignContent="center">
+          <Box
+            pad={{ left: 'large' }}
+            gridArea="left-mid"
+            direction="column"
+            justify="center"
+          >
             <Heading margin={{ bottom: 'xsmall' }}>Cross Pods</Heading>
             <Text>The final piece to the MLH Fellowship experience.</Text>
             <br />
