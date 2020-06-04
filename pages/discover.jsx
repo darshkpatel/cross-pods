@@ -48,28 +48,28 @@ export default function Discover() {
   const [profile, setProfile] = useState({});
   const [activeFellows, setActiveFellows] = useState([]);
 
+  const getProfile = async () => {
+    const result = await axios.get('/api/me');
+    setProfile(result.data);
+  };
+
+  const getActiveFellows = async () => {
+    const result = await axios.get('/api/list');
+    setActiveFellows(result.data);
+  };
+
+  const createChatRoom = async () => {
+    const result = await axios.get('/api/rooms/create');
+    return result.data.message;
+  };
+
   useEffect(() => {
-    const getProfile = async () => {
-      const result = await axios.get('/api/me');
-      setProfile(result.data);
-    };
-
-    const getActiveFellows = async () => {
-      const result = await axios.get('/api/list');
-      setActiveFellows(result.data);
-    };
-
     getProfile();
     getActiveFellows();
     setInterval(getActiveFellows, 3000);
   }, []);
 
   const generateInteger = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-
-  const createChatRoom = async () => {
-    const result = await axios.get('/api/rooms/create');
-    return result.data.message;
-  };
 
   const fellowsToGraph = (fellows) => ({
     nodes: fellows.map((fellow) => ({
