@@ -56,15 +56,15 @@ export default async function link(req, res) {
       }
     ])
     if (value.length < 2) {
+      await Fellow.updateOne({ username: user.nickname }, { $set: { online: true } })
       res.json({
         message: "Wait For other fellow to join"
       })
-      Fellow.update({ username: user.nickname }, { $set: { online: true } })
     } else {
       const room = await GenerateRoomID();
       const members = [value[0].members[0], value[0].members[1], fellow._id];
       const redirect = await Redirect.create({ url: `https://meet.jit.si/${room}`, members })
-      await Fellow.update({ _id: { $in: members } }, { online: false, room: redirect._id })
+      await Fellow.updateMany({ _id: { $in: members } }, { online: false, room: redirect._id })
       res.json({
         message: redirect._id,
       })
